@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mood Music Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #1e1e2f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .mood-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #444;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #666;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 30px;
+    }
+
+    .now-playing {
+      margin-top: 10px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎧 Mood Music Player</h1>
+
+  <div class="mood-buttons">
+    <button onclick="playMood('happy')">🎉 Happy</button>
+    <button onclick="playMood('sad')">😢 Sad</button>
+    <button onclick="playMood('energetic')">⚡ Energetic</button>
+  </div>
+
+  <audio id="player" controls></audio>
+  <div class="now-playing" id="nowPlaying">Choose a mood to start music</div>
+
+  <script>
+    const player = document.getElementById("player");
+    const nowPlaying = document.getElementById("nowPlaying");
+
+    const musicLibrary = {
+      happy: [
+        { title: "Sunny Day", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      ],
+      sad: [
+        { title: "Sad Piano", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      ],
+      energetic: [
+        { title: "Upbeat Beat", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+      ]
+    };
+
+    function playMood(mood) {
+      const tracks = musicLibrary[mood];
+      if (tracks && tracks.length > 0) {
+        const song = tracks[Math.floor(Math.random() * tracks.length)];
+        player.src = song.src;
+        player.play();
+        nowPlaying.textContent = `Now Playing: ${song.title}`;
+{
+        nowPlaying.textContent = "No music found for this mood.";
+      }
+    }
+}
+  </script>
+</body>
+</html>
